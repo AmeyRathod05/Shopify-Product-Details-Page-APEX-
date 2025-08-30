@@ -1,0 +1,488 @@
+{%- style -%}
+  .shopify-section-group-header-group {
+    z-index: 4;
+    position: sticky;
+    top: 0;
+}
+  .custom-header {
+    padding: 10px 0;
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+    position: relative;
+    z-index: 100;
+  }
+  
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+    color: #000;
+  }
+  
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 350px;
+    height: 100vh;
+    background: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .mobile-sidebar.active {
+    left: 0;
+  }
+  
+  .mobile-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .mobile-sidebar-logo {
+    max-width: 100px;
+  }
+  
+  .mobile-sidebar-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  
+  .mobile-sidebar-content {
+    padding: 20px 15px;
+  }
+  
+  .mobile-sidebar-logo img {
+    max-width: 80px;
+    height: auto;
+}
+  .mobile-sidebar .custom-header-link {
+    display: block;
+    padding: 5px 0;
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .mobile-sidebar .menu-tab-links {
+    display: block;
+  }
+  
+  .mobile-sidebar .menu-tab-link {
+    display: block;
+    padding: 5px 0;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .menu-tab {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #00000080;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    z-index: 99;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  
+  .menu-tab.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .menu-tab-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .menu-tab-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .menu-tab-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: color 0.2s ease;
+    padding: 10px 0;
+  }
+  
+  .menu-tab-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+  
+  .menu-tab-link:hover:after {
+    width: 100%;
+  }
+  
+  .custom-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .custom-header-logo {
+    max-width: 80px;
+  }
+  
+  .custom-header-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .custom-header-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+ .custom-header-nav .custom-header-link {
+    color: {{ section.settings.link_color }};
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform:capitalize;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+  }
+  
+  .custom-header-search {
+    position: relative;
+
+  }
+    
+  .custom-header-search input {
+    padding: 2px 0 2px 4px;
+    border: 1px solid #e1e1e1;
+    background-color: #000;
+    border-radius:0;
+    font-size: 14px;
+    width: 200px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+ 
+  .custom-header-icons {
+    display: flex;
+    gap:5px;
+    align-items: center;
+  }
+  
+  .custom-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .custom-header-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: {{ section.settings.link_color }};
+    transition: stroke 0.2s ease;
+  }
+  
+  
+  
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .custom-header {
+      background: #ffffff !important;
+    }
+    
+    .mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      color: #000 !important;
+    }
+    
+    .custom-header-icon {
+      color: #000 !important;
+    }
+    
+    .custom-header-icon svg {
+      stroke: #000 !important;
+    }
+    
+    .custom-header-icons a {
+      color: #000 !important;
+    }
+    
+    .custom-header-icons svg {
+      stroke: #000 !important;
+    }
+    
+    .mobile-toggle svg path {
+      fill: #000 !important;
+    }
+    
+    .custom-header-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .custom-header-nav {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .custom-header-nav > a:not(.custom-header-icon) {
+      display: none;
+    }
+    
+    .custom-header-search {
+      display: none;
+    }
+    
+    .menu-tab {
+      display: none;
+    }
+    
+    .custom-header-logo {
+      margin-left: 10px;
+    }
+    
+    .desktop-logo {
+      display: none !important;
+    }
+    
+    .mobile-logo {
+      display: inline-block !important;
+      max-height: 30px;
+      width: auto;
+    }
+    
+    .custom-header-logo-link {
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+{%- endstyle -%}
+
+<div class="custom-header-wrapper">
+  <header class="custom-header">
+    <div class="custom-header-container">
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_59_1541" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+          <rect width="26" height="26" fill="#D9D9D9"></rect>
+        </mask>
+        <g mask="url(#mask0_59_1541)">
+          <path d="M4.33301 18.4167V17.3333H21.6663V18.4167H4.33301ZM4.33301 13.25V12.1667H21.6663V13.25H4.33301ZM4.33301 8.08333V7H21.6663V8.08333H4.33301Z" fill="currentColor"></path>
+        </g>
+      </svg>
+    </button>
+    
+    <div class="custom-header-logo">
+      <a href="{{ routes.root_url }}" class="custom-header-logo-link">
+        {%- if section.settings.logo != blank -%}
+          <img class="desktop-logo" src="{{ section.settings.logo | img_url: '300x' }}" alt="{{ shop.name }}">
+        {%- else -%}
+          <h1 class="desktop-logo">{{ shop.name }}</h1>
+        {%- endif -%}
+      </a>
+    </div>
+    
+
+    <nav class="custom-header-nav" id="main-nav">
+      <a href="#" class="custom-header-link">New In</a>
+      <a href="#" class="custom-header-link">Bestsellers</a>
+      <a href="#" class="custom-header-link" id="menu-trigger">Menu</a>
+      
+      <div class="custom-header-search">
+    
+        <input type="text" placeholder="Search">
+      </div>
+      
+      <div class="custom-header-icons">
+        <a href="#" class="custom-header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        
+        <a href="#" class="custom-header-icon" style="position: relative;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          
+        </a>
+      </div>
+    </nav>
+
+
+    
+    </div>
+  </header>
+
+  <div class="menu-tab" id="menu-tab">
+    <div class="menu-tab-content">
+      <nav class="menu-tab-links">
+        <a href="#" class="menu-tab-link">View All</a>
+        <a href="#" class="menu-tab-link">Jeans</a>
+        <a href="#" class="menu-tab-link">Trousers</a>
+        <a href="#" class="menu-tab-link">Shirts</a>
+        <a href="#" class="menu-tab-link">T-Shirts</a>
+        <a href="#" class="menu-tab-link">Tops</a>
+        <a href="#" class="menu-tab-link">Shorts and Skorts</a>
+        <a href="#" class="menu-tab-link">Co-ords</a>
+        <a href="#" class="menu-tab-link">Dresses</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="mobile-sidebar" id="mobile-sidebar">
+  <div class="mobile-sidebar-header">
+    <div class="mobile-sidebar-logo">
+      {% if section.settings.mobile_logo != blank %}
+        <img src="{{ section.settings.mobile_logo | img_url: '200x' }}" alt="{{ shop.name }}">
+      {% elsif section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}">
+      {% else %}
+        <h2>{{ shop.name }}</h2>
+      {% endif %}
+    </div>
+    <button class="mobile-sidebar-close" id="mobile-sidebar-close">&times;</button>
+  </div>
+  
+  <div class="mobile-sidebar-content">
+    <a href="#" class="custom-header-link">New In</a>
+    <a href="#" class="custom-header-link">Bestsellers</a>
+    
+    <div class="menu-tab-links">
+      <a href="#" class="menu-tab-link">View All</a>
+      <a href="#" class="menu-tab-link">Jeans</a>
+      <a href="#" class="menu-tab-link">Trousers</a>
+      <a href="#" class="menu-tab-link">Shirts</a>
+      <a href="#" class="menu-tab-link">T-Shirts</a>
+      <a href="#" class="menu-tab-link">Tops</a>
+      <a href="#" class="menu-tab-link">Shorts and Skorts</a>
+      <a href="#" class="menu-tab-link">Co-ords</a>
+      <a href="#" class="menu-tab-link">Dresses</a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const menuTrigger = document.getElementById('menu-trigger');
+  const menuTab = document.getElementById('menu-tab');
+  
+  if (menuTrigger && menuTab) {
+    menuTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      menuTab.classList.toggle('active');
+    });
+  }
+  
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileSidebar = document.getElementById('mobile-sidebar');
+  const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
+  
+  if (mobileToggle && mobileSidebar && mobileSidebarClose) {
+    mobileToggle.addEventListener('click', function() {
+      mobileSidebar.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    mobileSidebarClose.addEventListener('click', function() {
+      mobileSidebar.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+   
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Header One",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Desktop Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_logo",
+      "label": "Mobile Logo"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Header One",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

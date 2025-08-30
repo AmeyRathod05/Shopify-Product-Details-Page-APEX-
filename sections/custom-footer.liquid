@@ -1,0 +1,221 @@
+
+{%- style -%}
+  .footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 0 20px;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+
+  .footer-left {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .footer-right {
+    max-width: 400px;
+    margin-left: auto;
+  }
+
+  .footer-heading {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 12px;
+  }
+
+  .footer-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+    display: block;
+    line-height: 1.4;
+  }
+
+  .footer-links a:hover {
+    color: #fff;
+  }
+
+  .newsletter-form__field-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .newsletter-form__field {
+    flex: 1;
+  }
+
+  .newsletter-form__field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 13px;
+    height: 40px;
+  }
+
+  .newsletter-form__button {
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    height: 40px;
+    white-space: nowrap;
+  }
+
+  .newsletter-form__button:hover {
+    background: #333;
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .footer-payment {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-payment .icon {
+    width: 38px;
+    height: 24px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .footer-right {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .footer-left {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div>
+        <h3 class="footer-heading">Account</h3>
+        <ul class="footer-links">
+          <li><a href="#">Log In </a></li>
+          <li><a href="#">Create an Account</a></li>
+          <li><a href="#">My Orders</a></li>
+         
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Company</h3>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Career/a></li>
+          <li><a href="#">Factory</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Get Help</h3>
+        <ul class="footer-links">
+          <li><a href="#">Start A Return</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Shipping and Payments</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <h3 class="footer-heading">Newsletter</h3>
+      <p style="color: #999; font-size: 13px; line-height: 1.6; margin-bottom: 20px;">Subscribe to our newsletter for the latest updates and offers.</p>
+      <div class="newsletter-form">
+        <div class="newsletter-form__field-wrapper">
+          <input
+            type="email"
+            class="newsletter-form__field"
+            placeholder="Enter your email"
+            disabled
+          >
+          <button type="button" class="newsletter-form__button" disabled>
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copyright">
+      &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "presets": [
+    {
+      "name": "Custom Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
