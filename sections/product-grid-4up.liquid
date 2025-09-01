@@ -1,0 +1,157 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+<div class="product-grid-4up page-width">
+  <h2 class="product-grid-4up__title">{{ section.settings.heading | default: 'Featured Products' }}</h2>
+  
+  <div class="product-grid-4up__container">
+    {% for product in collections.all.products limit: 4 %}
+      <div class="product-card">
+        <a href="{{ product.url }}?view=details" class="product-card__link">
+          <div class="product-card__image-container">
+            {% if product.featured_image %}
+              <img
+                  src="{{ product.featured_image | img_url: '300x500_crop_center' }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                loading="lazy"
+                width="300"
+                height="400"
+                class="product-card__image"
+              >
+            {% else %}
+              {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            <div class="product-card__price">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="product-card__compare-price">
+                  {{ product.compare_at_price | money }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .product-grid-4up {
+    padding: 4rem 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .product-grid-4up__title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.4rem;
+  }
+
+  .product-grid-4up__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+ 
+
+  .product-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+
+  .product-card__image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 166.67%; /* 500/300 = 1.6667 */
+    overflow: hidden;
+  }
+
+  .product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+ 
+
+  .product-card__info {
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  .product-card__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .product-card__price {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .product-card__compare-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 989px) {
+    .product-grid-4up__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .product-grid-4up__container {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "4-Up Product Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Featured Products",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "4-Up Product Grid"
+    }
+  ]
+}
+{% endschema %}
