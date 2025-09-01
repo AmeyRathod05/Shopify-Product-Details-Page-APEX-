@@ -82,11 +82,19 @@
       "type": "product-details-section",
       "name": "Product Details Section",
       "settings": {}
+    },
+    "product_grid_4up_nxQe97": {
+      "type": "product-grid-4up",
+      "name": "4-Up Product Grid",
+      "settings": {
+        "heading": "Featured Products"
+      }
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "product_details_section_Y4dgwp"
+    "product_details_section_Y4dgwp",
+    "product_grid_4up_nxQe97"
   ]
 }
